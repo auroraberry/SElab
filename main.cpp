@@ -16,6 +16,7 @@ using namespace std;
 #include "./include/nurse.hh"
 #include "./include/driver.hh"
 #include "./include/ambulance.hh"
+#include "./include/medicine.hh"
 
 void displayMainMenu();
 void HandleAppointmentsMenu();
@@ -24,6 +25,7 @@ void HandleDoctorsMenu();
 void HandleNnursesMenu();
 void HandleDriversMenu();
 void HandleAmbulancesMenu();
+void HandleMedicineMenu();
 void HandleDateInput();
 void fillMapsFromCSV();
 void saveMapsToCSV();
@@ -43,7 +45,8 @@ void displayMainMenu()
         cout << "[03] : DOCTORS\n";
         cout << "[04] : NURSES\n";
         cout << "[05] : DRIVERS\n";
-        cout << "[06] : AMBULANCES\n\n";
+        cout << "[06] : AMBULANCES\n";
+        cout << "[07] : MEDICINE\n\n";
         cout << "[-1] : EXIT\n";
         cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
         cout << "Enter your choice: ";
@@ -77,6 +80,9 @@ void displayMainMenu()
             break;
         case 6:
             HandleAmbulancesMenu();
+            break;
+        case 7:
+            HandleMedicineMenu();
             break;
         default:
             cout << "\nInvalid Choice!\n";
@@ -469,6 +475,74 @@ void HandleDriversMenu()
         else if (purpose == 5)
         {
             hospital::printDrivers();
+        }
+        else if (purpose == -1)
+        {
+            exit = true;
+            break;
+        }
+        else
+        {
+            cout << "Invalid choice!\n";
+        }
+
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clearing cin buffer;
+
+        cout << endl;
+        cout << "\nPress ENTER to continue...\n";
+        cout << endl;
+
+        getchar();
+    }
+    return;
+}
+
+void HandleMedicineMenu()
+{
+    bool exit = false;
+    while (!exit)
+    {
+        int purpose = 0;
+        cout << "\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        cout << "\nSelect an option:\n\n";
+
+        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        cout << "./HOME/MEDICINE\n";
+        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+        cout << "[01] : Register a new medicine\n";
+        cout << "[02] : Get medicine details\n";
+        cout << "[03] : Remove a medicine\n";
+        cout << "[04] : Fetch medicine details from history\n";
+        cout << "[05] : Get details of all registered medicine\n\n";
+        cout << "[-1] : Back\n";
+        cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~\n\n";
+        cout << "Enter your choice: ";
+        cin >> purpose;
+
+        if (purpose == 1)
+        {
+            medicine m;
+            m.addMedicine();
+        }
+        else if (purpose == 2)
+        {
+            medicine m;
+            m.getDetails(1);
+            m.printDetails();
+        }
+        else if (purpose == 3)
+        {
+            medicine m;
+            m.removeMedicine();
+        }
+        else if (purpose == 4)
+        {
+            medicine m;;
+            m.getDetailsFromHistory();
+        }
+        else if (purpose == 5)
+        {
+            hospital::printMedicine();
         }
         else if (purpose == -1)
         {

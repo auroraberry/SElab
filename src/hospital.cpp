@@ -10,6 +10,7 @@ using namespace std;
 #include "./../include/ambulance.hh"
 #include "./../include/appointment.hh"
 #include "./../include/hospital.hh"
+#include "./../include/medicine.hh"
 
 //defining already declared static members in the global scope;
 
@@ -19,12 +20,14 @@ map<int, nurse> hospital::nursesList;
 map<int, driver> hospital::driversList;
 map<int, ambulance> hospital::ambulancesList;
 map<int, appointment> hospital::appointmentsList;
+map<int, medicine> hospital::medicinesList;
 
 const int hospital::doctorsLimit = 30;
 const int hospital::nursesLimit = 50;
 const int hospital::driversLimit = 30;
 const int hospital::ambulancesLimit = 30;
 const int hospital::appointmentsLimit = 240; //per day;
+const int hospital::medicinesLimit = 1000;
 // ummm, patients limit, ummm, no!
 // appointments limit is kind of a patients limit;
 // rest hospitalized patients limit must be equal to;
@@ -67,6 +70,12 @@ void hospital::printAmbulances()
 void hospital::printAppointments()
 {
     for (auto i : appointmentsList)
+        i.second.printDetails(), cout << "\n";
+    return;
+}
+void hospital::printMedicine()
+{
+    for (auto i : medicinesList)
         i.second.printDetails(), cout << "\n";
     return;
 }
